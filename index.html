@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Zoom Slider</title>
+    <style>
+        * {
+            font-family: Calibri, monospace;
+        }
+        #image {
+            border-color: grey;
+            border-radius: 5px;
+            border-style: dotted;
+        }
+
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <img id="image" src="./sample.jpg" alt="sample image" height="424" width="730">
+    <br>
+    <label>
+        Zoom +/-
+        <input id="zoom" type="range">
+    </label>
+
+    <script>
+        let image = document.getElementById('image');
+        // get original image dimensions
+        let realWidth = image.naturalWidth;
+        let realHeight = image.naturalHeight;
+
+        let input = document.getElementById('zoom');
+
+        // zoom scaling factor, by default 1.2
+        let zoom_factor = 1.2;
+        document.querySelector('input').onchange = () => {
+          image.width = realWidth * Math.pow(1.2, (input.value-50) / 10); // scaling factor increases based on power value of the slider
+          image.style.height = 'auto'; // to main aspect ratio image height is auto
+          console.log(`image dimensions change to height=${image.clientHeight}, width=${image.clientWidth}`);
+        };
+
+    </script>
+</div>
+</body>
+</html>
